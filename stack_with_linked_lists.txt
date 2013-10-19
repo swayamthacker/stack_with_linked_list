@@ -1,0 +1,105 @@
+#include <iostream>
+
+using namespace std;
+
+struct node {int x; node *nextptr;};
+
+//stack implementation
+int top = 0;
+void push(int);
+void pop();
+//const int size = 10;
+int integer,element;
+//int listcount;
+//int x = 0;
+int temp = -1;
+node *pointer;
+node *root;
+node *tail;
+node *currentptr;
+node *temptr;
+//int regarray[size];
+
+int main()
+{
+
+
+    while(temp!=0)
+    {
+
+        cout<<"Enter 1 to push an element onto the stack"<<endl;
+        cout<<"Enter 2 to pop an element off the stack"<<endl;
+        cout<<"Enter 0 to exit"<<endl;
+        cin>>temp;
+
+
+    switch(temp)
+    {
+
+        case 1:
+        {
+
+            //push implementation, tests for when the stack is full.
+
+            cout<<"Please enter the value that needs to be added to the stack"<<endl;
+            cin>>integer;
+
+            push(integer);
+            break;
+        }
+         case 2:
+         {  //pop implementation, tests for when the stack is empty.
+
+            pop();
+         }
+
+        break;
+        }
+        }
+        return 0;
+        }
+
+void push(int element)
+{
+        pointer = new node;
+        pointer->nextptr = 0;
+        pointer->x = element;
+
+        if(top==0)
+        {
+            root = pointer;
+            tail = pointer;
+            pointer->nextptr = root;
+        }
+        else
+        {
+            tail->nextptr = pointer;
+            tail = pointer;
+            pointer->nextptr = root;
+        }
+
+        top++;
+        cout<<"The number of elements on the stack is "<<top<<endl;
+}
+
+void pop()
+{
+    if (top==0)
+    {
+        cout<<"Cannot pop any more elements as the stack is empty and top is now "<<top<<endl;
+        return;
+    }
+    currentptr = root;
+    while(currentptr->nextptr!=tail)
+    {
+        currentptr = currentptr->nextptr;
+    }
+    temptr = tail;
+    cout<<"The popped element is "<<temptr->x<<endl;
+    tail = currentptr;
+    currentptr->nextptr= root;
+    delete temptr;
+    top--;
+    cout<<"The number of elements on the stack is "<<top<<endl;
+}
+
